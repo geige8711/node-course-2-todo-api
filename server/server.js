@@ -7,6 +7,13 @@ const {Todo} = require('./models/todo');
 const {User} = require('./models/user');
 app.use(bodyParser.json());
 
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({todos});
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
 
 app.listen(3000, () => {
     console.log('Started on port 3000');
